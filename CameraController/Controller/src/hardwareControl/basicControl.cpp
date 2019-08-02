@@ -1,23 +1,29 @@
+#include "basicControl.h"
 #include <Arduino.h>
 
-#define FOCUS_PIN 4
-#define TRIGGER_PIN 5
 
 
 
 void initPins() {
   pinMode(FOCUS_PIN, OUTPUT);
-  pinMode(TRIGGER_PIN, OUTPUT);
+  pinMode(SHUTTER_PIN, OUTPUT);
 }
 
 
-void trigger() {
+void pullFocus() {
+  digitalWrite(FOCUS_PIN, LOW);
+}
 
-
+void releaseFocus() {
+  digitalWrite(FOCUS_PIN, HIGH);
 }
 
 
-void focus() {
-
-
+void shutter() {
+  pullFocus();
+  delay(10);
+  digitalWrite(SHUTTER_PIN, LOW);
+  delay(10);
+  digitalWrite(SHUTTER_PIN, HIGH);
+  releaseFocus();
 }
